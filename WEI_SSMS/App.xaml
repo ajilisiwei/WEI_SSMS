@@ -1,0 +1,17 @@
+﻿<Application x:Class="WEI_SSMS.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="..\Views\TestWindow.xaml">
+    <Application.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ColorStyle.xaml"/>
+                <ResourceDictionary Source="FontStyle.xaml"/>
+                <ResourceDictionary Source="Style4Label.xaml"/>
+                <ResourceDictionary Source="Style4TextBox.xaml"/>
+                <ResourceDictionary Source="Style4Button.xaml"/>
+                <ResourceDictionary Source="Style4DataGrid.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+    </Application.Resources>
+</Application>

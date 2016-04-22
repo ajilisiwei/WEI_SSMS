@@ -1,0 +1,15 @@
+﻿<Window x:Class="WEI_SSMS.Views.Login"
+        xmlns ="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:h="clr-namespace:WEI_SSMS.Common"
+        Title="Login" Height="250.202" Width="391.093" Background="AliceBlue" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
+        Name="LoginWindow" WindowStyle="ThreeDBorderWindow">
+    <Grid>
+        <Button Command="{Binding LoginCmd}" Content="登录" HorizontalAlignment="Left" Height="44" Margin="83,149,0,0" VerticalAlignment="Top" Width="106" FontSize="25"/>
+        <Button Command="{Binding CloseWindowCmd}" Content="关闭" HorizontalAlignment="Left" Height="44" Margin="201,149,0,0" VerticalAlignment="Top" Width="104" FontSize="25"/>
+        <Label Content="用户名：" HorizontalAlignment="Left" Height="40" Margin="58,31,0,0" VerticalAlignment="Top" Width="98" FontSize="20"/>
+        <Label Content="密码：" HorizontalAlignment="Left" Height="40" Margin="79,81,0,0" VerticalAlignment="Top" Width="77" FontSize="20"/>
+        <TextBox Text="{Binding login.UserName}" HorizontalAlignment="Left" Height="40" Margin="156,31,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="185" FontSize="20"/>
+        <PasswordBox Name="Txt_Password" HorizontalAlignment="Left" Margin="156,81,0,0" VerticalAlignment="Top" Width="185" Height="40" PasswordChanged="Txt_Password_PasswordChanged" />
+    </Grid>
+</Window>

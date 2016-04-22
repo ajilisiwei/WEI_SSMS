@@ -1,0 +1,30 @@
+﻿<Window x:Class="WEI_SSMS.Views.TestWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="TestWindow" Height="396" Width="559" WindowStyle="ThreeDBorderWindow">
+    <Grid>
+        <Button Command="{Binding AddUserCmd}" Content="Add" HorizontalAlignment="Left" Height="24" Margin="301,26,0,0" VerticalAlignment="Top" Width="59"/>
+        <Button Content="Update" HorizontalAlignment="Left" Height="24" Margin="301,64,0,0" VerticalAlignment="Top" Width="59"/>
+        <TextBox HorizontalAlignment="Left" Height="24" Margin="39,64,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="241"/>
+        <Button Content="Delete" HorizontalAlignment="Left" Height="24" Margin="406,64,0,0" VerticalAlignment="Top" Width="59"/>
+        <TextBox Text="{Binding TestModel.UserName, Mode=OneWayToSource}" HorizontalAlignment="Left" Height="24" Margin="39,27,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="241"/>
+        <DataGrid ItemsSource="{Binding TestModel.UserList}" HorizontalAlignment="Left" Height="181" Margin="30,170,0,15" Width="492" AutoGenerateColumns="False" 
+                  IsReadOnly="True" Style="{StaticResource DataGridStyle1}" ColumnHeaderStyle="{StaticResource DataGridColumnHeader1}"
+                  RowStyle="{StaticResource DataGridRow1}" CellStyle="{StaticResource DataGridCell1}" CanUserReorderColumns="False" CanUserSortColumns="False" GridLinesVisibility="Vertical" CanUserResizeRows="False" ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Center">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="UserName" Binding="{Binding UserName}" Width="100"></DataGridTextColumn>
+                <DataGridTextColumn Header="LoginName" Binding="{Binding LoginName}" Width="100"></DataGridTextColumn>
+                <DataGridTextColumn Header="CreatedOn" Binding="{Binding CreatedOn}" Width="100"></DataGridTextColumn>
+                <DataGridTextColumn Header="CreatedBy" Binding="{Binding CreatedBy}" Width="100"></DataGridTextColumn>
+                <DataGridTemplateColumn Header="Operation" Width="100">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Command="{Binding UpdateUserCmd}">编辑</Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Command="{Binding ReserachUserCmd}" Content="Reserach" HorizontalAlignment="Left" Height="24" Margin="301,116,0,0" VerticalAlignment="Top" Width="59"/>
+    </Grid>
+</Window>
