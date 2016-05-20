@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WEI_SSMS.Command;
-using WEI_SSMS.Models;
 
 namespace WEI_SSMS
 {

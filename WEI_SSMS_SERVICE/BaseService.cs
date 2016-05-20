@@ -5,7 +5,6 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TeYou.Billiards;
 using WEI_SSMS_DAL;
 
 namespace WEI_SSMS_SERVICE
@@ -15,7 +14,7 @@ namespace WEI_SSMS_SERVICE
         where TEFModel : class,new()
         where TPrimaryKey : struct
     {
-        private DbContext _Context = new SSMSEntities();
+        private DbContext _Context = new SSMSDBEntities();
 
         /// <summary>
         /// EF实体转换为Model

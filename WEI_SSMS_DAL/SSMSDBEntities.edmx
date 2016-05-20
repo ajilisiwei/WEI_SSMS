@@ -1,0 +1,642 @@
+﻿<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+<!-- EF Runtime content -->
+<edmx:Runtime>
+<!-- SSDL content -->
+<edmx:StorageModels>
+<Schema Namespace="SSMSDBEntitiesModel.Store" Alias="Self" Provider="System.Data.SqlServerCe.4.0" ProviderManifestToken="4.0" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="SSMSDBEntitiesModelStoreContainer">
+    <EntitySet Name="Contract" EntityType="SSMSDBEntitiesModel.Store.Contract" store:Type="Tables" />
+    <EntitySet Name="Dictionary" EntityType="SSMSDBEntitiesModel.Store.Dictionary" store:Type="Tables" />
+    <EntitySet Name="Goods" EntityType="SSMSDBEntitiesModel.Store.Goods" store:Type="Tables" />
+    <EntitySet Name="Jobs" EntityType="SSMSDBEntitiesModel.Store.Jobs" store:Type="Tables" />
+    <EntitySet Name="Order" EntityType="SSMSDBEntitiesModel.Store.Order" store:Type="Tables" />
+    <EntitySet Name="OrderDetail" EntityType="SSMSDBEntitiesModel.Store.OrderDetail" store:Type="Tables" />
+    <EntitySet Name="PhotoMessage" EntityType="SSMSDBEntitiesModel.Store.PhotoMessage" store:Type="Tables" />
+    <EntitySet Name="Specification" EntityType="SSMSDBEntitiesModel.Store.Specification" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="SSMSDBEntitiesModel.Store.Users" store:Type="Tables" />
+    <AssociationSet Name="FK_GOODS_REFERENCE_SPECIFIC" Association="SSMSDBEntitiesModel.Store.FK_GOODS_REFERENCE_SPECIFIC">
+      <End Role="Specification" EntitySet="Specification" />
+      <End Role="Goods" EntitySet="Goods" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ORDERDET_REFERENCE_ORDER" Association="SSMSDBEntitiesModel.Store.FK_ORDERDET_REFERENCE_ORDER">
+      <End Role="Order" EntitySet="Order" />
+      <End Role="OrderDetail" EntitySet="OrderDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PHOTOMES_REFERENCE_CONTRACT" Association="SSMSDBEntitiesModel.Store.FK_PHOTOMES_REFERENCE_CONTRACT">
+      <End Role="Contract" EntitySet="Contract" />
+      <End Role="PhotoMessage" EntitySet="PhotoMessage" />
+    </AssociationSet>
+    <AssociationSet Name="FK_USERS_REFERENCE_JOBS" Association="SSMSDBEntitiesModel.Store.FK_USERS_REFERENCE_JOBS">
+      <End Role="Jobs" EntitySet="Jobs" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Contract">
+    <Key>
+      <PropertyRef Name="ContractID" />
+    </Key>
+    <Property Name="ContractID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ContractNo" Type="nvarchar" Nullable="false" MaxLength="30" />
+    <Property Name="Customer" Type="nvarchar" MaxLength="30" />
+    <Property Name="Contact" Type="nvarchar" MaxLength="30" />
+    <Property Name="PhoneNo" Type="nvarchar" MaxLength="30" />
+    <Property Name="SecondAgent" Type="nvarchar" MaxLength="30" />
+    <Property Name="FirstAgent" Type="nvarchar" MaxLength="30" />
+    <Property Name="CreateOn" Type="datetime" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="10" />
+    <Property Name="ModifiedOn" Type="datetime" />
+    <Property Name="ModifiedBy" Type="nvarchar" MaxLength="30" />
+    <Property Name="IsDel" Type="int" />
+    <Property Name="Remark" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Dictionary">
+    <Key>
+      <PropertyRef Name="DicID" />
+    </Key>
+    <Property Name="DicID" Type="int" Nullable="false" />
+    <Property Name="DicKey" Type="int" />
+    <Property Name="DicValue" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Goods">
+    <Key>
+      <PropertyRef Name="GoodsID" />
+    </Key>
+    <Property Name="GoodsID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="GoodsName" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Number" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="TypeID" Type="uniqueidentifier" />
+    <Property Name="SpecificationID" Type="uniqueidentifier" />
+    <Property Name="RentPrice" Type="numeric" />
+    <Property Name="Freight" Type="numeric" />
+    <Property Name="GoodsNo" Type="nvarchar" MaxLength="30" />
+    <Property Name="PhotoNo" Type="nvarchar" MaxLength="30" />
+    <Property Name="SellingPrice" Type="numeric" />
+    <Property Name="Pledge" Type="numeric" />
+    <Property Name="Transportation" Type="int" />
+    <Property Name="IsDel" Type="int" />
+    <Property Name="Remark" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Jobs">
+    <Key>
+      <PropertyRef Name="JobID" />
+    </Key>
+    <Property Name="JobID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="JobName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Remark" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="OrderID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ContractID" Type="uniqueidentifier" />
+    <Property Name="Amount" Type="numeric" />
+    <Property Name="Number" Type="int" />
+    <Property Name="GoodsID" Type="uniqueidentifier" />
+    <Property Name="SellerID" Type="uniqueidentifier" />
+    <Property Name="OrderType" Type="tinyint" />
+    <Property Name="OrderStatus" Type="tinyint" />
+    <Property Name="CreatedOn" Type="datetime" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="30" />
+    <Property Name="ModiedOn" Type="datetime" />
+    <Property Name="ModiedBy" Type="nvarchar" MaxLength="30" />
+    <Property Name="IsDel" Type="tinyint" />
+    <Property Name="Remark" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="OrderDetail">
+    <Key>
+      <PropertyRef Name="OrderDetailID" />
+    </Key>
+    <Property Name="OrderDetailID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OrderID" Type="uniqueidentifier" />
+    <Property Name="GoodsID" Type="uniqueidentifier" />
+    <Property Name="DealType" Type="int" />
+    <Property Name="SellingPrice" Type="numeric" />
+    <Property Name="RentPrice" Type="numeric" />
+    <Property Name="Number" Type="int" />
+    <Property Name="StartTime" Type="datetime" />
+    <Property Name="EndTime" Type="datetime" />
+    <Property Name="PayTax" Type="int" />
+    <Property Name="Amount" Type="numeric" />
+    <Property Name="PaidAmount" Type="numeric" />
+    <Property Name="SellerID" Type="uniqueidentifier" />
+    <Property Name="DeliveryOn" Type="datetime" />
+    <Property Name="PledgePer" Type="numeric" />
+    <Property Name="PledgeTotal" Type="numeric" />
+    <Property Name="FreightPer" Type="numeric" />
+    <Property Name="FreightTotal" Type="numeric" />
+    <Property Name="Transportation" Type="int" />
+    <Property Name="ReturnPlegeAmount" Type="numeric" />
+    <Property Name="PaymentOn" Type="datetime" />
+    <Property Name="RentDays" Type="int" />
+    <Property Name="CreatedOn" Type="datetime" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="30" />
+    <Property Name="ModifiedOn" Type="datetime" />
+    <Property Name="ModifiedBy" Type="nvarchar" MaxLength="30" />
+    <Property Name="IsDel" Type="int" />
+    <Property Name="Remark" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="PhotoMessage">
+    <Key>
+      <PropertyRef Name="PhotoID" />
+    </Key>
+    <Property Name="PhotoID" Type="int" Nullable="false" />
+    <Property Name="ContractID" Type="uniqueidentifier" />
+    <Property Name="PhotoType" Type="int" />
+    <Property Name="PhotoPath" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="Specification">
+    <Key>
+      <PropertyRef Name="SpecificationID" />
+    </Key>
+    <Property Name="SpecificationID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="SpecificationName" Type="nvarchar" MaxLength="30" />
+    <Property Name="Lenght" Type="float" />
+    <Property Name="Width" Type="float" />
+    <Property Name="Height" Type="float" />
+    <Property Name="Remark" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="30" />
+    <Property Name="IDCardNo" Type="nvarchar" MaxLength="30" />
+    <Property Name="PhoneNo" Type="nvarchar" MaxLength="20" />
+    <Property Name="LoginName" Type="nvarchar" MaxLength="30" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" />
+    <Property Name="Gender" Type="int" />
+    <Property Name="Type" Type="int" />
+    <Property Name="CreatedOn" Type="datetime" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="30" />
+    <Property Name="ModifiedOn" Type="datetime" />
+    <Property Name="ModifiedBy" Type="nvarchar" MaxLength="30" />
+    <Property Name="JobID" Type="uniqueidentifier" />
+    <Property Name="Remark" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <Association Name="FK_GOODS_REFERENCE_SPECIFIC">
+    <End Role="Specification" Type="SSMSDBEntitiesModel.Store.Specification" Multiplicity="0..1" />
+    <End Role="Goods" Type="SSMSDBEntitiesModel.Store.Goods" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Specification">
+        <PropertyRef Name="SpecificationID" />
+      </Principal>
+      <Dependent Role="Goods">
+        <PropertyRef Name="SpecificationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ORDERDET_REFERENCE_ORDER">
+    <End Role="Order" Type="SSMSDBEntitiesModel.Store.Order" Multiplicity="0..1" />
+    <End Role="OrderDetail" Type="SSMSDBEntitiesModel.Store.OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PHOTOMES_REFERENCE_CONTRACT">
+    <End Role="Contract" Type="SSMSDBEntitiesModel.Store.Contract" Multiplicity="0..1" />
+    <End Role="PhotoMessage" Type="SSMSDBEntitiesModel.Store.PhotoMessage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contract">
+        <PropertyRef Name="ContractID" />
+      </Principal>
+      <Dependent Role="PhotoMessage">
+        <PropertyRef Name="ContractID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_USERS_REFERENCE_JOBS">
+    <End Role="Jobs" Type="SSMSDBEntitiesModel.Store.Jobs" Multiplicity="0..1" />
+    <End Role="Users" Type="SSMSDBEntitiesModel.Store.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Jobs">
+        <PropertyRef Name="JobID" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="JobID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
+</edmx:StorageModels>
+<!-- CSDL content -->
+<edmx:ConceptualModels>
+<Schema Namespace="SSMSDBEntitiesModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="SSMSDBEntitiesEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Contract" EntityType="SSMSDBEntitiesModel.Contract" />
+    <EntitySet Name="Dictionary" EntityType="SSMSDBEntitiesModel.Dictionary" />
+    <EntitySet Name="Goods" EntityType="SSMSDBEntitiesModel.Goods" />
+    <EntitySet Name="Jobs" EntityType="SSMSDBEntitiesModel.Jobs" />
+    <EntitySet Name="Order" EntityType="SSMSDBEntitiesModel.Order" />
+    <EntitySet Name="OrderDetail" EntityType="SSMSDBEntitiesModel.OrderDetail" />
+    <EntitySet Name="PhotoMessage" EntityType="SSMSDBEntitiesModel.PhotoMessage" />
+    <EntitySet Name="Specification" EntityType="SSMSDBEntitiesModel.Specification" />
+    <EntitySet Name="Users" EntityType="SSMSDBEntitiesModel.Users" />
+    <AssociationSet Name="FK_PHOTOMES_REFERENCE_CONTRACT" Association="SSMSDBEntitiesModel.FK_PHOTOMES_REFERENCE_CONTRACT">
+      <End Role="Contract" EntitySet="Contract" />
+      <End Role="PhotoMessage" EntitySet="PhotoMessage" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GOODS_REFERENCE_SPECIFIC" Association="SSMSDBEntitiesModel.FK_GOODS_REFERENCE_SPECIFIC">
+      <End Role="Specification" EntitySet="Specification" />
+      <End Role="Goods" EntitySet="Goods" />
+    </AssociationSet>
+    <AssociationSet Name="FK_USERS_REFERENCE_JOBS" Association="SSMSDBEntitiesModel.FK_USERS_REFERENCE_JOBS">
+      <End Role="Jobs" EntitySet="Jobs" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ORDERDET_REFERENCE_ORDER" Association="SSMSDBEntitiesModel.FK_ORDERDET_REFERENCE_ORDER">
+      <End Role="Order" EntitySet="Order" />
+      <End Role="OrderDetail" EntitySet="OrderDetail" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Contract">
+    <Key>
+      <PropertyRef Name="ContractID" />
+    </Key>
+    <Property Name="ContractID" Type="Guid" Nullable="false" />
+    <Property Name="ContractNo" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="Customer" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="Contact" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="PhoneNo" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="SecondAgent" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="FirstAgent" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="CreateOn" Type="DateTime" />
+    <Property Name="CreateBy" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+    <Property Name="ModifiedOn" Type="DateTime" />
+    <Property Name="ModifiedBy" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="IsDel" Type="Int32" />
+    <Property Name="Remark" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="PhotoMessage" Relationship="SSMSDBEntitiesModel.FK_PHOTOMES_REFERENCE_CONTRACT" FromRole="Contract" ToRole="PhotoMessage" />
+  </EntityType>
+  <EntityType Name="Dictionary">
+    <Key>
+      <PropertyRef Name="DicID" />
+    </Key>
+    <Property Name="DicID" Type="Int32" Nullable="false" />
+    <Property Name="DicKey" Type="Int32" />
+    <Property Name="DicValue" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Goods">
+    <Key>
+      <PropertyRef Name="GoodsID" />
+    </Key>
+    <Property Name="GoodsID" Type="Guid" Nullable="false" />
+    <Property Name="GoodsName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Number" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+    <Property Name="TypeID" Type="Guid" />
+    <Property Name="SpecificationID" Type="Guid" />
+    <Property Name="RentPrice" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Freight" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="GoodsNo" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="PhotoNo" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="SellingPrice" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Pledge" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Transportation" Type="Int32" />
+    <Property Name="IsDel" Type="Int32" />
+    <Property Name="Remark" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Specification" Relationship="SSMSDBEntitiesModel.FK_GOODS_REFERENCE_SPECIFIC" FromRole="Goods" ToRole="Specification" />
+  </EntityType>
+  <EntityType Name="Jobs">
+    <Key>
+      <PropertyRef Name="JobID" />
+    </Key>
+    <Property Name="JobID" Type="Guid" Nullable="false" />
+    <Property Name="JobName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Remark" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Users" Relationship="SSMSDBEntitiesModel.FK_USERS_REFERENCE_JOBS" FromRole="Jobs" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="OrderID" Type="Guid" Nullable="false" />
+    <Property Name="ContractID" Type="Guid" />
+    <Property Name="Amount" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Number" Type="Int32" />
+    <Property Name="GoodsID" Type="Guid" />
+    <Property Name="SellerID" Type="Guid" />
+    <Property Name="OrderType" Type="Byte" />
+    <Property Name="OrderStatus" Type="Byte" />
+    <Property Name="CreatedOn" Type="DateTime" />
+    <Property Name="CreatedBy" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="ModiedOn" Type="DateTime" />
+    <Property Name="ModiedBy" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="IsDel" Type="Byte" />
+    <Property Name="Remark" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="OrderDetail" Relationship="SSMSDBEntitiesModel.FK_ORDERDET_REFERENCE_ORDER" FromRole="Order" ToRole="OrderDetail" />
+  </EntityType>
+  <EntityType Name="OrderDetail">
+    <Key>
+      <PropertyRef Name="OrderDetailID" />
+    </Key>
+    <Property Name="OrderDetailID" Type="Guid" Nullable="false" />
+    <Property Name="OrderID" Type="Guid" />
+    <Property Name="GoodsID" Type="Guid" />
+    <Property Name="DealType" Type="Int32" />
+    <Property Name="SellingPrice" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="RentPrice" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Number" Type="Int32" />
+    <Property Name="StartTime" Type="DateTime" />
+    <Property Name="EndTime" Type="DateTime" />
+    <Property Name="PayTax" Type="Int32" />
+    <Property Name="Amount" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="PaidAmount" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="SellerID" Type="Guid" />
+    <Property Name="DeliveryOn" Type="DateTime" />
+    <Property Name="PledgePer" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="PledgeTotal" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="FreightPer" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="FreightTotal" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Transportation" Type="Int32" />
+    <Property Name="ReturnPlegeAmount" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="PaymentOn" Type="DateTime" />
+    <Property Name="RentDays" Type="Int32" />
+    <Property Name="CreatedOn" Type="DateTime" />
+    <Property Name="CreatedBy" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="ModifiedOn" Type="DateTime" />
+    <Property Name="ModifiedBy" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="IsDel" Type="Int32" />
+    <Property Name="Remark" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Order" Relationship="SSMSDBEntitiesModel.FK_ORDERDET_REFERENCE_ORDER" FromRole="OrderDetail" ToRole="Order" />
+  </EntityType>
+  <EntityType Name="PhotoMessage">
+    <Key>
+      <PropertyRef Name="PhotoID" />
+    </Key>
+    <Property Name="PhotoID" Type="Int32" Nullable="false" />
+    <Property Name="ContractID" Type="Guid" />
+    <Property Name="PhotoType" Type="Int32" />
+    <Property Name="PhotoPath" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Contract" Relationship="SSMSDBEntitiesModel.FK_PHOTOMES_REFERENCE_CONTRACT" FromRole="PhotoMessage" ToRole="Contract" />
+  </EntityType>
+  <EntityType Name="Specification">
+    <Key>
+      <PropertyRef Name="SpecificationID" />
+    </Key>
+    <Property Name="SpecificationID" Type="Guid" Nullable="false" />
+    <Property Name="SpecificationName" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="Lenght" Type="Double" />
+    <Property Name="Width" Type="Double" />
+    <Property Name="Height" Type="Double" />
+    <Property Name="Remark" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Goods" Relationship="SSMSDBEntitiesModel.FK_GOODS_REFERENCE_SPECIFIC" FromRole="Specification" ToRole="Goods" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Guid" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="IDCardNo" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="PhoneNo" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+    <Property Name="LoginName" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="Password" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Gender" Type="Int32" />
+    <Property Name="Type" Type="Int32" />
+    <Property Name="CreatedOn" Type="DateTime" />
+    <Property Name="CreatedBy" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="ModifiedOn" Type="DateTime" />
+    <Property Name="ModifiedBy" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="JobID" Type="Guid" />
+    <Property Name="Remark" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Jobs" Relationship="SSMSDBEntitiesModel.FK_USERS_REFERENCE_JOBS" FromRole="Users" ToRole="Jobs" />
+  </EntityType>
+  <Association Name="FK_PHOTOMES_REFERENCE_CONTRACT">
+    <End Role="Contract" Type="SSMSDBEntitiesModel.Contract" Multiplicity="0..1" />
+    <End Role="PhotoMessage" Type="SSMSDBEntitiesModel.PhotoMessage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contract">
+        <PropertyRef Name="ContractID" />
+      </Principal>
+      <Dependent Role="PhotoMessage">
+        <PropertyRef Name="ContractID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GOODS_REFERENCE_SPECIFIC">
+    <End Role="Specification" Type="SSMSDBEntitiesModel.Specification" Multiplicity="0..1" />
+    <End Role="Goods" Type="SSMSDBEntitiesModel.Goods" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Specification">
+        <PropertyRef Name="SpecificationID" />
+      </Principal>
+      <Dependent Role="Goods">
+        <PropertyRef Name="SpecificationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_USERS_REFERENCE_JOBS">
+    <End Role="Jobs" Type="SSMSDBEntitiesModel.Jobs" Multiplicity="0..1" />
+    <End Role="Users" Type="SSMSDBEntitiesModel.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Jobs">
+        <PropertyRef Name="JobID" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="JobID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ORDERDET_REFERENCE_ORDER">
+    <End Role="Order" Type="SSMSDBEntitiesModel.Order" Multiplicity="0..1" />
+    <End Role="OrderDetail" Type="SSMSDBEntitiesModel.OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
+</edmx:ConceptualModels>
+<!-- C-S mapping content -->
+<edmx:Mappings>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SSMSDBEntitiesModelStoreContainer" CdmEntityContainer="SSMSDBEntitiesEntities">
+    <EntitySetMapping Name="Contract">
+      <EntityTypeMapping TypeName="SSMSDBEntitiesModel.Contract">
+        <MappingFragment StoreEntitySet="Contract">
+          <ScalarProperty Name="ContractID" ColumnName="ContractID" />
+          <ScalarProperty Name="ContractNo" ColumnName="ContractNo" />
+          <ScalarProperty Name="Customer" ColumnName="Customer" />
+          <ScalarProperty Name="Contact" ColumnName="Contact" />
+          <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+          <ScalarProperty Name="SecondAgent" ColumnName="SecondAgent" />
+          <ScalarProperty Name="FirstAgent" ColumnName="FirstAgent" />
+          <ScalarProperty Name="CreateOn" ColumnName="CreateOn" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="IsDel" ColumnName="IsDel" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Dictionary">
+      <EntityTypeMapping TypeName="SSMSDBEntitiesModel.Dictionary">
+        <MappingFragment StoreEntitySet="Dictionary">
+          <ScalarProperty Name="DicID" ColumnName="DicID" />
+          <ScalarProperty Name="DicKey" ColumnName="DicKey" />
+          <ScalarProperty Name="DicValue" ColumnName="DicValue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Goods">
+      <EntityTypeMapping TypeName="SSMSDBEntitiesModel.Goods">
+        <MappingFragment StoreEntitySet="Goods">
+          <ScalarProperty Name="GoodsID" ColumnName="GoodsID" />
+          <ScalarProperty Name="GoodsName" ColumnName="GoodsName" />
+          <ScalarProperty Name="Number" ColumnName="Number" />
+          <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+          <ScalarProperty Name="SpecificationID" ColumnName="SpecificationID" />
+          <ScalarProperty Name="RentPrice" ColumnName="RentPrice" />
+          <ScalarProperty Name="Freight" ColumnName="Freight" />
+          <ScalarProperty Name="GoodsNo" ColumnName="GoodsNo" />
+          <ScalarProperty Name="PhotoNo" ColumnName="PhotoNo" />
+          <ScalarProperty Name="SellingPrice" ColumnName="SellingPrice" />
+          <ScalarProperty Name="Pledge" ColumnName="Pledge" />
+          <ScalarProperty Name="Transportation" ColumnName="Transportation" />
+          <ScalarProperty Name="IsDel" ColumnName="IsDel" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Jobs">
+      <EntityTypeMapping TypeName="SSMSDBEntitiesModel.Jobs">
+        <MappingFragment StoreEntitySet="Jobs">
+          <ScalarProperty Name="JobID" ColumnName="JobID" />
+          <ScalarProperty Name="JobName" ColumnName="JobName" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Order">
+      <EntityTypeMapping TypeName="SSMSDBEntitiesModel.Order">
+        <MappingFragment StoreEntitySet="Order">
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="ContractID" ColumnName="ContractID" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Number" ColumnName="Number" />
+          <ScalarProperty Name="GoodsID" ColumnName="GoodsID" />
+          <ScalarProperty Name="SellerID" ColumnName="SellerID" />
+          <ScalarProperty Name="OrderType" ColumnName="OrderType" />
+          <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="ModiedOn" ColumnName="ModiedOn" />
+          <ScalarProperty Name="ModiedBy" ColumnName="ModiedBy" />
+          <ScalarProperty Name="IsDel" ColumnName="IsDel" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderDetail">
+      <EntityTypeMapping TypeName="SSMSDBEntitiesModel.OrderDetail">
+        <MappingFragment StoreEntitySet="OrderDetail">
+          <ScalarProperty Name="OrderDetailID" ColumnName="OrderDetailID" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="GoodsID" ColumnName="GoodsID" />
+          <ScalarProperty Name="DealType" ColumnName="DealType" />
+          <ScalarProperty Name="SellingPrice" ColumnName="SellingPrice" />
+          <ScalarProperty Name="RentPrice" ColumnName="RentPrice" />
+          <ScalarProperty Name="Number" ColumnName="Number" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="PayTax" ColumnName="PayTax" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="PaidAmount" ColumnName="PaidAmount" />
+          <ScalarProperty Name="SellerID" ColumnName="SellerID" />
+          <ScalarProperty Name="DeliveryOn" ColumnName="DeliveryOn" />
+          <ScalarProperty Name="PledgePer" ColumnName="PledgePer" />
+          <ScalarProperty Name="PledgeTotal" ColumnName="PledgeTotal" />
+          <ScalarProperty Name="FreightPer" ColumnName="FreightPer" />
+          <ScalarProperty Name="FreightTotal" ColumnName="FreightTotal" />
+          <ScalarProperty Name="Transportation" ColumnName="Transportation" />
+          <ScalarProperty Name="ReturnPlegeAmount" ColumnName="ReturnPlegeAmount" />
+          <ScalarProperty Name="PaymentOn" ColumnName="PaymentOn" />
+          <ScalarProperty Name="RentDays" ColumnName="RentDays" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="IsDel" ColumnName="IsDel" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PhotoMessage">
+      <EntityTypeMapping TypeName="SSMSDBEntitiesModel.PhotoMessage">
+        <MappingFragment StoreEntitySet="PhotoMessage">
+          <ScalarProperty Name="PhotoID" ColumnName="PhotoID" />
+          <ScalarProperty Name="ContractID" ColumnName="ContractID" />
+          <ScalarProperty Name="PhotoType" ColumnName="PhotoType" />
+          <ScalarProperty Name="PhotoPath" ColumnName="PhotoPath" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Specification">
+      <EntityTypeMapping TypeName="SSMSDBEntitiesModel.Specification">
+        <MappingFragment StoreEntitySet="Specification">
+          <ScalarProperty Name="SpecificationID" ColumnName="SpecificationID" />
+          <ScalarProperty Name="SpecificationName" ColumnName="SpecificationName" />
+          <ScalarProperty Name="Lenght" ColumnName="Lenght" />
+          <ScalarProperty Name="Width" ColumnName="Width" />
+          <ScalarProperty Name="Height" ColumnName="Height" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="SSMSDBEntitiesModel.Users">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="IDCardNo" ColumnName="IDCardNo" />
+          <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+          <ScalarProperty Name="LoginName" ColumnName="LoginName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="JobID" ColumnName="JobID" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
+</edmx:Mappings>
+</edmx:Runtime>
+<!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+<edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+<Connection><DesignerInfoPropertySet><DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" /></DesignerInfoPropertySet></Connection>
+<edmx:Options><DesignerInfoPropertySet><DesignerProperty Name="ValidateOnBuild" Value="True" /><DesignerProperty Name="EnablePluralization" Value="False" /><DesignerProperty Name="IncludeForeignKeysInModel" Value="True" /><DesignerProperty Name="UseLegacyProvider" Value="False" /><DesignerProperty Name="CodeGenerationStrategy" Value="None" /></DesignerInfoPropertySet></edmx:Options>
+<edmx:Diagrams >
+      <Diagram DiagramId="bc0fadd66e0346148ac14a5890ffbdf3" Name="Diagram1">
+        <EntityTypeShape EntityType="SSMSDBEntitiesModel.Contract" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="SSMSDBEntitiesModel.Dictionary" Width="1.5" PointX="2.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SSMSDBEntitiesModel.Goods" Width="1.5" PointX="8" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="SSMSDBEntitiesModel.Jobs" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SSMSDBEntitiesModel.Order" Width="1.5" PointX="5.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SSMSDBEntitiesModel.OrderDetail" Width="1.5" PointX="8" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SSMSDBEntitiesModel.PhotoMessage" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SSMSDBEntitiesModel.Specification" Width="1.5" PointX="5.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SSMSDBEntitiesModel.Users" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="SSMSDBEntitiesModel.FK_PHOTOMES_REFERENCE_CONTRACT" ManuallyRouted="false" />
+        <AssociationConnector Association="SSMSDBEntitiesModel.FK_GOODS_REFERENCE_SPECIFIC" ManuallyRouted="false" />
+        <AssociationConnector Association="SSMSDBEntitiesModel.FK_USERS_REFERENCE_JOBS" ManuallyRouted="false" />
+        <AssociationConnector Association="SSMSDBEntitiesModel.FK_ORDERDET_REFERENCE_ORDER" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+</edmx:Designer></edmx:Edmx>

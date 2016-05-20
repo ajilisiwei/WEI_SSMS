@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TeYou.Billiards
+namespace WEI_SSMS_SERVICE
 {
     /// <summary>
     /// 通用功能接口

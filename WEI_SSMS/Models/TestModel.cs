@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using WEI_SSMS_BLL;
 using WEI_SSMS_MODELS;
 
-namespace WEI_SSMS.Models
+namespace WEI_SSMS
 {
     public class TestModel : NotificationObject
     {

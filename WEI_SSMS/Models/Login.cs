@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using WEI_SSMS_BLL;
+using WEI_SSMS_COMMON;
 using WEI_SSMS_MODELS;
 using WEI_SSMS_SERVICE;
 
@@ -23,7 +25,7 @@ namespace WEI_SSMS
                 this._username = value;
                 this.RaisePropertyChanged("UserName");
             }
-        }  
+        }
 
         private string _password;
         public string Password
@@ -46,14 +48,14 @@ namespace WEI_SSMS
             UsersModel usermodel = new UsersModel();
             usermodel.LoginName ="wei";
             usermodel.Password = "123";
-            if (new UsersService().UserLogin(usermodel))
+            if (new UsersBll().Login(usermodel))
             {
+                CommonMess.PersentUser = usermodel;
                 if (LoginSuccessAction != null)
                 {
                     LoginSuccessAction.BeginInvoke(null,null,null);
                 }
             }
         }
-
     }
 }

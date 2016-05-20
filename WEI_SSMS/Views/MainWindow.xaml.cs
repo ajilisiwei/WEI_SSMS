@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WEI_SSMS.ViewModels;
+using WEI_SSMS_COMMON;
 
 namespace WEI_SSMS
 {
@@ -20,9 +22,12 @@ namespace WEI_SSMS
     /// </summary>
     public partial class MainWindow : Window
     {
+        public MainWindowModel mainWindowModel { set; get; }
         public MainWindow()
         {
             InitializeComponent();
+            this.mainWindowModel = new MainWindowModel();
+            this.DataContext = mainWindowModel;
         }
     }
 }
